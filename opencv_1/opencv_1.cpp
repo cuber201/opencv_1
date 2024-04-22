@@ -35,14 +35,7 @@ int main()
     Mat mask = Mat::zeros(image.size(), image.type());
     circle(mask, Point(image.cols / 2, image.rows / 2), 300, Scalar(255, 255, 255), -1);
     Mat r = Mat::zeros(image.size(), image.type());
-    bitwise_and(image, mask, r);
-    for (int i = 0; i < r.rows; i++) {
-        for (int j = 0; j < r.cols; j++) {
-            if (!mask.at<uchar>(i, j)) {
-                r.at<uchar>(i, j) = 255;
-            }
-        }
-    }
+    image.copyTo(r, mask);
     imshow("Result", r);
     waitKey(0);
     return 0;
